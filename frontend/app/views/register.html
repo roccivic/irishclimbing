@@ -1,1 +1,32 @@
-<p>This is the register view.</p>
+<form>
+    <div class="form-group">
+        <label for="college">
+            College name
+        </label>
+        <input class="form-control" type="text" id="college" ng-model="college" placeholder="Please enter the full name of your college" />
+    </div>
+    <div class="form-group">
+        <label for="name">
+            Name of competitor
+        </label>
+        <input class="form-control" type="text" id="name" ng-model="name" placeholder="Please enter your full name" />
+    </div>
+    <div class="form-group">
+        <label for="category">
+            Category
+        </label>
+        <select class="form-control" id="category" ng-model="category" ng-options="category for category in categories">
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="grade">
+            Grade climbing at
+        </label>
+        <select class="form-control" id="grade" ng-model="grade" ng-options="grade for grade in grades">
+        </select>
+    </div>
+    <button class="btn btn-primary btn-block">
+        Submit
+    </button>
+    <input type="reset" class="btn btn-default btn-block" value="Reset" />
+</form>
