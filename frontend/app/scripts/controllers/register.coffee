@@ -8,7 +8,7 @@
  # Controller of the irishclimbingApp
 ###
 angular.module('irishclimbingApp')
-  .controller 'RegisterCtrl', ($scope) ->
+  .controller 'RegisterCtrl', ($scope, $http, serverUrl) ->
     $scope.categories = [
         'Male A'
         'Male B'
@@ -20,5 +20,30 @@ angular.module('irishclimbingApp')
     ]
     $scope.college = ''
     $scope.name = ''
+    $scope.email = ''
     $scope.category = $scope.categories[0]
     $scope.grade = $scope.grades[0]
+    FormData = ->
+        {
+            college: $scope.college
+            name: $scope.name
+            email: $scope.email
+            category: $scope.category
+            grade: $scope.grade
+        }
+    $scope.submit = ->
+        console.log 123
+        $scope.loading = true
+        $scope.error = false
+        $scope.error = false
+        console.log FormData()
+        $http.post(
+            serverUrl + 'register.php',
+            FormData()
+        )
+        .success ->
+            $scope.loading = false
+            $scope.success = true
+        .error ->
+            $scope.loading = false
+            $scope.error = true

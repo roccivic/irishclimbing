@@ -1,15 +1,28 @@
-<form>
+
+<form name="register" ng-submit="submit()">
+    <div class="alert alert-danger" ng-if="error">
+        Error
+    </div>
+    <div class="alert alert-success" ng-if="success">
+        Success
+    </div>
     <div class="form-group">
         <label for="college">
             College name
         </label>
-        <input class="form-control" type="text" id="college" ng-model="college" placeholder="Please enter the full name of your college" />
+        <input class="form-control" type="text" id="college" ng-model="college" placeholder="Please enter the full name of your college" required />
     </div>
     <div class="form-group">
         <label for="name">
             Name of competitor
         </label>
-        <input class="form-control" type="text" id="name" ng-model="name" placeholder="Please enter your full name" />
+        <input class="form-control" type="text" id="name" ng-model="name" placeholder="Please enter your full name" required />
+    </div>
+    <div class="form-group">
+        <label for="email">
+            Email address of competitor
+        </label>
+        <input class="form-control" type="email" id="email" ng-model="email" placeholder="Please enter your email address" required />
     </div>
     <div class="form-group">
         <label for="category">
@@ -25,8 +38,11 @@
         <select class="form-control" id="grade" ng-model="grade" ng-options="grade for grade in grades">
         </select>
     </div>
-    <button class="btn btn-primary btn-block">
+    <button type="submit" class="btn btn-primary btn-block" ng-disabled="loading">
         Submit
+        <span ng-if="loading">
+            <i class="fa fa-spinner fa-spin"></i>
+        </span>
     </button>
     <input type="reset" class="btn btn-default btn-block" value="Reset" />
 </form>
