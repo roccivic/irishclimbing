@@ -8,7 +8,7 @@
  # Controller of the irishclimbingApp
 ###
 angular.module('irishclimbingApp')
-  .controller 'RegisterCtrl', ($scope, $http, serverUrl) ->
+  .controller 'RegisterCtrl', ($scope, $http, $window, $timeout, serverUrl) ->
     $scope.categories = [
         'Male A'
         'Male B'
@@ -48,9 +48,15 @@ angular.module('irishclimbingApp')
             $scope.loading = false
             $scope.success = true
             ResetForm()
-        .error (error_text) ->
+            $timeout ->
+                $window.scrollTo 0, 0
+            , 4
+        .error (data) ->
             $scope.loading = false
             $scope.error = true
-            $scope.error_text = error_text
+            $scope.error_text = data.message
+            $timeout ->
+                $window.scrollTo 0, 0
+            , 4
 
     ResetForm()
