@@ -48,8 +48,9 @@ angular.module('irishclimbingApp')
             $scope.loading = false
             $scope.success = true
             ResetForm()
-        .error ->
+        .error (error_text) ->
             $scope.loading = false
             $scope.error = true
+            $scope.error_text = error_text
 
     ResetForm()
