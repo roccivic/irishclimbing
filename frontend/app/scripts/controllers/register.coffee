@@ -17,7 +17,7 @@ angular.module('irishclimbingApp')
     ]
 
     $scope.grades = [
-        '4+', '5+', '6+', '7+'
+        'Don\'t know', '4+', '5+', '6+', '7+'
     ]
 
     ResetForm = ->
