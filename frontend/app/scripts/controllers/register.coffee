@@ -15,14 +15,18 @@ angular.module('irishclimbingApp')
         'Female A'
         'Female B'
     ]
+
     $scope.grades = [
-        '4+' , '5+', '6+', '7+'
+        '4+', '5+', '6+', '7+'
     ]
-    $scope.college = ''
-    $scope.name = ''
-    $scope.email = ''
-    $scope.category = $scope.categories[0]
-    $scope.grade = $scope.grades[0]
+
+    ResetForm = ->
+        $scope.college = ''
+        $scope.name = ''
+        $scope.email = ''
+        $scope.category = $scope.categories[0]
+        $scope.grade = $scope.grades[0]
+
     FormData = ->
         {
             college: $scope.college
@@ -31,12 +35,11 @@ angular.module('irishclimbingApp')
             category: $scope.category
             grade: $scope.grade
         }
+
     $scope.submit = ->
-        console.log 123
         $scope.loading = true
         $scope.error = false
         $scope.error = false
-        console.log FormData()
         $http.post(
             serverUrl + 'register.php',
             FormData()
@@ -44,6 +47,9 @@ angular.module('irishclimbingApp')
         .success ->
             $scope.loading = false
             $scope.success = true
+            ResetForm()
         .error ->
             $scope.loading = false
             $scope.error = true
+
+    ResetForm()
