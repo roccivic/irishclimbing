@@ -6,37 +6,57 @@
     <div class="alert alert-success" ng-if="success">
         Success
     </div>
-    <div class="form-group">
-        <label for="college">
-            College name
-        </label>
-        <input class="form-control" type="text" id="college" ng-model="college" placeholder="Please enter the full name of your college" required maxlength="255" />
+    <div class="form-group row">
+        <div class="col-md-4">
+            <label for="college">
+                College name
+            </label>
+        </div>
+        <div class="col-md-8">
+            <input class="form-control" type="text" id="college" ng-model="college" placeholder="Please enter the full name of your college" required maxlength="255" />
+        </div>
     </div>
-    <div class="form-group">
-        <label for="name">
-            Name of competitor
-        </label>
-        <input class="form-control" type="text" id="name" ng-model="name" placeholder="Please enter your full name" required maxlength="255" />
+    <div class="form-group row">
+        <div class="col-md-4">
+            <label for="name">
+                Name of competitor
+            </label>
+        </div>
+        <div class="col-md-8">
+            <input class="form-control" type="text" id="name" ng-model="name" placeholder="Please enter your full name" required maxlength="255" />
+        </div>
     </div>
-    <div class="form-group">
-        <label for="email">
-            Email address of competitor
-        </label>
-        <input class="form-control" type="email" id="email" ng-model="email" placeholder="Please enter your email address" required maxlength="255" />
+    <div class="form-group row">
+        <div class="col-md-4">
+            <label for="email">
+                Email address of competitor
+            </label>
+        </div>
+        <div class="col-md-8">
+            <input class="form-control" type="email" id="email" ng-model="email" placeholder="Please enter your email address" required maxlength="255" />
+        </div>
     </div>
-    <div class="form-group">
-        <label for="category">
-            Category
-        </label>
-        <select class="form-control" id="category" ng-model="category" ng-options="category for category in categories">
-        </select>
+    <div class="form-group row">
+        <div class="col-md-4">
+            <label for="category">
+                Category
+            </label>
+        </div>
+        <div class="col-md-8">
+            <select class="form-control" id="category" ng-model="category" ng-options="category for category in categories">
+            </select>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="grade">
-            Grade climbing at
-        </label>
-        <select class="form-control" id="grade" ng-model="grade" ng-options="grade for grade in grades">
-        </select>
+    <div class="form-group row">
+        <div class="col-md-4">
+            <label for="grade">
+                Grade climbing at
+            </label>
+        </div>
+        <div class="col-md-8">
+            <select class="form-control" id="grade" ng-model="grade" ng-options="grade for grade in grades">
+            </select>
+        </div>
     </div>
     <button type="submit" class="btn btn-primary btn-block" ng-disabled="loading">
         Submit
