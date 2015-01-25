@@ -22,17 +22,17 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container">
+    <div class="container" ng-cloak>
       <div class="header">
         <ul class="nav nav-pills pull-right" ng-controller="MenuCtrl">
           <li ng-class="{ active: isActive('home')}">
-            <a ng-href="#">Home</a>
-          </li><!-- 
+            <a href="#">Home</a>
+          </li>
           <li ng-class="{ active: isActive('register')}">
-            <a ng-href="#/register">Register</a>
-          </li> -->
+            <a href="#/register">Register</a>
+          </li>
           <li ng-class="{ active: isActive('contact')}">
-            <a ng-href="#/contact">Contact</a>
+            <a href="#/contact">Contact</a>
           </li>
         </ul>
         <h2>Irish Rock Climbing<br>Intervarsities 2015</h2>
