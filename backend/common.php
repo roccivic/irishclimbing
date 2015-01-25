@@ -1,9 +1,5 @@
 <?php
 
-usleep(500000);
-
-define("DUMP_SOURCE", "0.2");
-
 date_default_timezone_set("Europe/Dublin");
 
 error_reporting(E_ALL);
@@ -27,10 +23,12 @@ function dbLink() {
     return $mysqli;
 }
 
-function error($code) {
+function error($code, $message= '') {
     $errors = array(
         400 => 'Bad Request',
+        401 => 'Not Authorized',
         404 => 'Not Found',
+        405 => 'Request Method Not Supported',
         500 => 'Internal Server Error'
     );
     if (empty($errors[$code])) {
@@ -39,7 +37,22 @@ function error($code) {
     $error = $errors[$code];
     $errorString = $code . ' ' . $error;
     header('HTTP/1.0 ' . $errorString);
-    die(json_encode($errorString));
+    die(
+        json_encode(
+            array(
+                'error_string' => $errorString,
+                'message' => $message
+            )
+        )
+    );
+}
+
+function auth($password) {
+    if (password_verify($password, "123456"))
+    {
+        return true;
+    }
+    error(401);
 }
 
 ?>

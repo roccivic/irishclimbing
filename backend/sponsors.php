@@ -1,8 +1,9 @@
 <?php
 
-    require_once 'common.php';
-    $db = dbLink();
+require_once 'common.php';
+$db = dbLink();
 
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $query = "SELECT `title`,`link`
               FROM `sponsors`
               ORDER BY `title`";
@@ -15,5 +16,8 @@
         $rows[] = $row;
     }
     echo json_encode($rows, JSON_PRETTY_PRINT);
+} else {
+    error(405);
+}
 
 ?>
