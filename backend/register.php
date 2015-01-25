@@ -8,13 +8,29 @@
 
     if (empty($request->college)) {
         error(400);
-    } else if (empty($request->name)) {
+    } else if (strlen($request->college) > 255) {
         error(400);
-    } else if (empty($request->email)) {
+    }
+    if (empty($request->name)) {
         error(400);
-    } else if (empty($request->category)) {
+    } else if (strlen($request->name) > 255) {
         error(400);
-    } else if (empty($request->grade)) {
+    }
+    if (empty($request->email)) {
+        error(400);
+    } else if (strlen($request->email) > 255) {
+        error(400);
+    } else if (strpos($request->email, '@') === false) {
+        error(400);
+    }
+    if (empty($request->category)) {
+        error(400);
+    } else if (strlen($request->category) > 255) {
+        error(400);
+    }
+    if (empty($request->grade)) {
+        error(400);
+    } else if (strlen($request->grade) > 255) {
         error(400);
     }
 
