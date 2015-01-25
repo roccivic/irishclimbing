@@ -1,6 +1,5 @@
 /* Space out content a bit */
 body {
-  padding-top: 20px;
   padding-bottom: 20px;
 }
 
@@ -14,8 +13,10 @@ body {
 
 /* Custom page header */
 .header {
-  border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 30px;
+}
+/* Custom page header */
+.header ul {
+  float: left !important;
 }
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
