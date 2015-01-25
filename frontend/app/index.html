@@ -41,11 +41,20 @@
       <div ng-view=""></div>
 
       <br>
-      <div class="footer">
-        <p>Our sponsors:</p>
-        <ul>
-          <li>CIT sports office</li>
-        </ul>
+      <div class="footer" ng-controller="SponsorsCtrl">
+        <p ng-if="loading">
+            <i class="fa fa-spinner fa-spin"></i>
+        </p>
+        <div ng-if="!loading && !error">
+          <p>Our sponsors:</p>
+          <ul ng-repeat="sponsor in sponsors">
+            <li>
+              <a target="_blank" ng-href="{{ sponsor.link }}">
+                {{ sponsor.title }}
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -76,6 +85,7 @@
         <script src="scripts/controllers/register.js"></script>
         <script src="scripts/controllers/contact.js"></script>
         <script src="scripts/controllers/menu.js"></script>
+        <script src="scripts/controllers/sponsors.js"></script>
         <!-- endbuild -->
 </body>
 </html>
