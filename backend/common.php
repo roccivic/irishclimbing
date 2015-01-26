@@ -4,11 +4,16 @@ date_default_timezone_set("Europe/Dublin");
 
 error_reporting(E_ALL);
 
-header('Content-type: application/json');
-
-header('Access-Control-Allow-Origin: *');
+$http_origin = $_SERVER['HTTP_ORIGIN'];
+if (   $http_origin == "http://localhost:9000"
+    || $http_origin == "http://www.irishclimbingintervarsities.net"
+    || $http_origin == "http://irishclimbingintervarsities.net"
+) {
+    header("Access-Control-Allow-Origin: $http_origin");
+}
 header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
 header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
+header('Content-type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     die();
