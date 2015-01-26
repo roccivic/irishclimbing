@@ -1,18 +1,28 @@
 <?php
 
+require_once 'config.php';
+
 date_default_timezone_set("Europe/Dublin");
 
-error_reporting(E_ALL);
+error_reporting(CFG_ERROR_LEVEL);
 
-$http_origin = $_SERVER['HTTP_ORIGIN'];
-if (   $http_origin == "http://localhost:9000"
-    || $http_origin == "http://www.irishclimbingintervarsities.net"
-    || $http_origin == "http://irishclimbingintervarsities.net"
-) {
-    header("Access-Control-Allow-Origin: $http_origin");
+// CORS headers
+if (CFG_CORS) {
+    $http_origin = empty($_SERVER['HTTP_ORIGIN']) ? '' : $_SERVER['HTTP_ORIGIN'];
+    if (
+        $http_origin == "http://www.irishclimbingintervarsities.net"
+        ||
+        $http_origin == "http://irishclimbingintervarsities.net"
+    ) {
+        header("Access-Control-Allow-Origin: $http_origin");
+    } else {
+        header("Access-Control-Allow-Origin: http://localhost:9000");
+    }
+    header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+    header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
 }
-header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
-header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
+
+// JSON header
 header('Content-type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
@@ -20,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 function dbLink() {
-    $mysqli = new mysqli("localhost", "root", "123456", "irishclimbing");
+    $mysqli = new mysqli(CFG_DB_HOST, CFG_DB_USER, CFG_DB_PASS, CFG_DB_DBNAME);
     if (mysqli_connect_errno()) {
         printf("Connect failed: %s\n", mysqli_connect_error());
         exit();
@@ -52,12 +62,14 @@ function error($code, $message= '') {
     );
 }
 
-function auth($password) {
-    if (password_verify($password, "123456"))
-    {
+function authUser($request) {
+    if(empty($request->password)) {
+        error(401, "Authentication Error");
+    }
+    if (password_verify($request->password, CFG_ADMIN_HASH)) {
         return true;
     }
-    error(401);
+    error(401, "Authentication Error");
 }
 
 ?>

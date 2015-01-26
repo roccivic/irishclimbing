@@ -9,8 +9,7 @@
 # Before building
 
 * change the path to the backend in `frontend/app/scripts/config.coffee`
-* change the authentication password hash in `backend/common.php` (generate using password_hash PGP function)
-* change the mysql connection details in `backend/common.php`
+* change required directives in `backend/config.php` (useg password_hash PHP function to generate your admin hash)
 
 # Building
 
