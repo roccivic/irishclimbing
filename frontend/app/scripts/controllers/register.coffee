@@ -41,7 +41,7 @@ angular.module('irishclimbingApp')
         $scope.error = false
         $scope.error = false
         $http.post(
-            serverUrl + 'register.php',
+            serverUrl + 'competitor.php',
             FormData()
         )
         .success ->
@@ -54,7 +54,7 @@ angular.module('irishclimbingApp')
         .error (data) ->
             $scope.loading = false
             $scope.error = true
-            $scope.error_text = data.message || "An error has occurred while processing your request"
+            $scope.error_text = data.message || data.error_text || "An error has occurred while processing your request"
             $timeout ->
                 $window.scrollTo 0, 0
             , 4

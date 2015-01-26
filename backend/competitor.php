@@ -1,12 +1,26 @@
 <?php
 
 require_once 'common.php';
+$db = dbLink();
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $postdata = file_get_contents("php://input");
-    $request = json_decode($postdata);
-    $db = dbLink();
-
+if ($_SERVER['REQUEST_METHOD'] == 'GET') { // LIST COMPETITORS
+    $request = json_decode(file_get_contents("php://input"));
+    // authentication
+    authUser($request);
+    // database operation
+    $query = "SELECT `id`,`college`,`name`,`email`,`category`,`grade`,`confirmation`,`timestamp`
+              FROM `competitors`
+              ORDER BY `college`, `name`";
+    $result = $db->query($query);
+    $rows = array();
+    $row = array();
+    while($row = $result->fetch_assoc()) {
+        $rows[] = $row;
+    }
+    echo json_encode($rows, JSON_PRETTY_PRINT); 
+} else if ($_SERVER['REQUEST_METHOD'] == 'POST') { // REGISTER COMPETITOR
+    $request = json_decode(file_get_contents("php://input"));
+    // input validation
     if (empty($request->college)) {
         error(400, "Please enter the name of your college");
     } else if (strlen($request->college) > 255) {
@@ -34,9 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else if (strlen($request->grade) > 255) {
         error(400, "Grade too long");
     }
-
+    // generate random confirmation string
     $confirmation = substr(md5(mt_rand()), 0, 5);
-
+    // database operation
     $query = "INSERT INTO `irishclimbing`.`competitors`
     (`college`,`name`,`email`,`category`,`grade`,`confirmation`)
     VALUES (?,?,?,?,?,?)";
@@ -57,7 +71,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         error(500);
     }
-
     echo json_encode($confirmation, JSON_PRETTY_PRINT);
 } else {
     error(405);
