@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') { // LIST SPONSORS
     while($row = $result->fetch_assoc()) {
         $rows[] = $row;
     }
-    echo json_encode($rows, JSON_PRETTY_PRINT); 
+    echo json_encode($rows);
 } else if ($_SERVER['REQUEST_METHOD'] == 'POST') { // INSERT SPONSOR
     $request = json_decode(file_get_contents("php://input"));
     // authentication
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') { // LIST SPONSORS
     } else {
         error(500);
     }
-    echo json_encode(true, JSON_PRETTY_PRINT);
+    echo json_encode(true);
 } else if ($_SERVER['REQUEST_METHOD'] == 'DELETE') { // DELETE SPONSOR
     $request = json_decode(file_get_contents("php://input"));
     if (empty($request)) {
@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') { // LIST SPONSORS
     } else {
         error(500);
     }
-    echo json_encode(true, JSON_PRETTY_PRINT);
+    echo json_encode(true);
 } else {
     // INVALID REQUEST METHOD
     error(405);

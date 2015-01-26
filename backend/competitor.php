@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') { // LIST COMPETITORS
     while($row = $result->fetch_assoc()) {
         $rows[] = $row;
     }
-    echo json_encode($rows, JSON_PRETTY_PRINT); 
+    echo json_encode($rows);
 } else if ($_SERVER['REQUEST_METHOD'] == 'POST') { // REGISTER COMPETITOR
     $request = json_decode(file_get_contents("php://input"));
     // input validation
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') { // LIST COMPETITORS
     // generate random confirmation string
     $confirmation = substr(md5(mt_rand()), 0, 5);
     // database operation
-    $query = "INSERT INTO `irishclimbing`.`competitors`
+    $query = "INSERT INTO `competitors`
     (`college`,`name`,`email`,`category`,`grade`,`confirmation`)
     VALUES (?,?,?,?,?,?)";
     if ($stmt = $db->prepare($query)) {
@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') { // LIST COMPETITORS
     } else {
         error(500);
     }
-    echo json_encode($confirmation, JSON_PRETTY_PRINT);
+    echo json_encode($confirmation);
 } else {
     error(405);
 }
