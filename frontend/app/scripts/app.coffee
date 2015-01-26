@@ -26,6 +26,9 @@ angular
       .when '/contact',
         templateUrl: 'views/contact.html'
         controller: 'ContactCtrl'
+      .when '/admin',
+        templateUrl: 'views/admin.html'
+        controller: 'AdminCtrl'
       .otherwise
         redirectTo: '/home'
 

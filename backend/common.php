@@ -18,7 +18,7 @@ if (CFG_CORS) {
     } else {
         header("Access-Control-Allow-Origin: http://localhost:9000");
     }
-    header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+    header('Access-Control-Allow-Methods: PUT, DELETE, POST, GET, OPTIONS');
     header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
 }
 
@@ -62,14 +62,15 @@ function error($code, $message= '') {
     );
 }
 
-function authUser($request) {
+function authUser() {
+    $request = json_decode(file_get_contents("php://input"));
     if(empty($request->password)) {
-        error(401, "Authentication Error");
+        error(401, "Authentication error: No password");
     }
     if (password_verify($request->password, CFG_ADMIN_HASH)) {
         return true;
     }
-    error(401, "Authentication Error");
+    error(401, "Authentication error");
 }
 
 ?>

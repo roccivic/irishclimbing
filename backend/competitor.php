@@ -3,10 +3,10 @@
 require_once 'common.php';
 $db = dbLink();
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET') { // LIST COMPETITORS
+if ($_SERVER['REQUEST_METHOD'] == 'POST') { // LIST COMPETITORS
     $request = json_decode(file_get_contents("php://input"));
     // authentication
-    authUser($request);
+    authUser();
     // database operation
     $query = "SELECT `id`,`college`,`name`,`email`,`category`,`grade`,`confirmation`,`timestamp`
               FROM `competitors`
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') { // LIST COMPETITORS
         $rows[] = $row;
     }
     echo json_encode($rows);
-} else if ($_SERVER['REQUEST_METHOD'] == 'POST') { // REGISTER COMPETITOR
+} else if ($_SERVER['REQUEST_METHOD'] == 'PUT') { // REGISTER COMPETITOR
     $request = json_decode(file_get_contents("php://input"));
     // input validation
     if (empty($request->college)) {

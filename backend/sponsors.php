@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') { // LIST SPONSORS
 } else if ($_SERVER['REQUEST_METHOD'] == 'POST') { // INSERT SPONSOR
     $request = json_decode(file_get_contents("php://input"));
     // authentication
-    authUser($request);
+    authUser();
     // input validation
     if (empty($request->title)) {
         error(400, "Please enter the title for the link");
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') { // LIST SPONSORS
         error(400, "Empty request payload");
     }
     // authentication
-    authUser($request);
+    authUser();
     // input validation
     if (empty($request->id)) {
         error(400, "Please enter the id of the sponsor to delete");
