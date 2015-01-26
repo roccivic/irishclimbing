@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') { // LIST COMPETITORS
     // database operation
     $query = "SELECT `id`,`college`,`name`,`email`,`category`,`grade`,`confirmation`,`timestamp`
               FROM `competitors`
-              ORDER BY `college`, `name`";
+              ORDER BY `id` DESC";
     $result = $db->query($query);
     $rows = array();
     $row = array();
