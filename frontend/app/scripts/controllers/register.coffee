@@ -54,7 +54,7 @@ angular.module('irishclimbingApp')
         .error (data) ->
             $scope.loading = false
             $scope.error = true
-            $scope.error_text = data.message
+            $scope.error_text = data.message || "An error has occurred while processing your request"
             $timeout ->
                 $window.scrollTo 0, 0
             , 4
