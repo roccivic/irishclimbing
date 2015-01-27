@@ -1,0 +1,88 @@
+<br>
+<div ng-if="loading">
+    <i class="fa fa-spinner fa-spin"></i>
+    Loading...
+</div>
+<div ng-if="!loading">
+    <ul class="nav nav-pills pull-left" ng-controller="MenuCtrl">
+      <li ng-class="{ active: isActive('admin/competitors')}">
+        <a href="#/admin/competitors">
+          Competitors
+        </a>
+      </li>
+      <li ng-class="{ active: isActive('admin/sponsors')}">
+        <a href="#/admin/sponsors">
+          Sponsors
+        </a>
+      </li>
+    </ul>
+    <div class="clearfix"></div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    <input class="form-control" placeholder="filter&hellip;" />
+                </th>
+                <th>
+                    <input class="form-control" placeholder="filter&hellip;" />
+                </th>
+                <th>
+                    <input class="form-control" placeholder="filter&hellip;" />
+                </th>
+                <th>
+                    <select class="form-control" id="category" ng-model="category" ng-options="category for category in categories">
+                    </select>
+                </th>
+                <th>
+                    <select class="form-control" id="grade" ng-model="grade" ng-options="grade for grade in grades">
+                    </select>
+                </th>
+                <th>
+                    <input class="form-control" placeholder="filter&hellip;" />
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    College
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Category
+                </th>
+                <th>
+                    Grade
+                </th>
+                <th>
+                    Date
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="competitor in competitors">
+                <td>
+                    {{ competitor.college }}
+                </td>
+                <td>
+                    {{ competitor.name }}
+                </td>
+                <td>
+                    {{ competitor.email }}
+                </td>
+                <td>
+                    {{ competitor.category }}
+                </td>
+                <td>
+                    {{ competitor.grade }}
+                </td>
+                <td>
+                    {{ competitor.timestamp }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

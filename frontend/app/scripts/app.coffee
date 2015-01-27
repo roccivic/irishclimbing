@@ -15,7 +15,8 @@ angular
     'ngRoute',
     'ngSanitize'
   ])
-  .config ($routeProvider) ->
+  .config ($routeProvider, $httpProvider) ->
+    $httpProvider.defaults.withCredentials = true;
     $routeProvider
       .when '/home',
         templateUrl: 'views/home.html'
@@ -29,6 +30,12 @@ angular
       .when '/admin',
         templateUrl: 'views/admin.html'
         controller: 'AdminCtrl'
+      .when '/admin/competitors',
+        templateUrl: 'views/admin/competitors.html'
+        controller: 'AdminCompetitorsCtrl'
+      .when '/admin/sponsors',
+        templateUrl: 'views/admin/sponsors.html'
+        controller: 'AdminSponsorsCtrl'
       .otherwise
         redirectTo: '/home'
 

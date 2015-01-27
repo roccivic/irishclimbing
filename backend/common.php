@@ -6,6 +6,8 @@ date_default_timezone_set("Europe/Dublin");
 
 error_reporting(CFG_ERROR_LEVEL);
 
+session_start();
+
 // CORS headers
 if (CFG_CORS) {
     $http_origin = empty($_SERVER['HTTP_ORIGIN']) ? '' : $_SERVER['HTTP_ORIGIN'];
@@ -18,6 +20,7 @@ if (CFG_CORS) {
     } else {
         header("Access-Control-Allow-Origin: http://localhost:9000");
     }
+    header('Access-Control-Allow-Credentials: true');
     header('Access-Control-Allow-Methods: PUT, DELETE, POST, GET, OPTIONS');
     header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
 }
@@ -63,14 +66,9 @@ function error($code, $message= '') {
 }
 
 function authUser() {
-    $request = json_decode(file_get_contents("php://input"));
-    if(empty($request->password)) {
-        error(401, "Authentication error: No password");
+    if (empty($_SESSION['loggedIn'])) {
+        error(401, "Invalid session");
     }
-    if (password_verify($request->password, CFG_ADMIN_HASH)) {
-        return true;
-    }
-    error(401, "Authentication error");
 }
 
 ?>

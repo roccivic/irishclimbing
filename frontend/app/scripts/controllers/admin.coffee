@@ -17,7 +17,6 @@ angular.module('irishclimbingApp')
         .success ->
             $scope.loading = false
             $location.path 'admin/competitors'
-        .error (data) ->
+        .error ->
             $scope.loading = false
-            $scope.error = true
-            $scope.error_text = data.message || data.error_string || "An error has occurred while processing your request"
+            $location.path '/'

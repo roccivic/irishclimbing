@@ -1,0 +1,50 @@
+<br>
+<div ng-if="loading">
+    <i class="fa fa-spinner fa-spin"></i>
+    Loading...
+</div>
+<div ng-if="!loading">
+    <ul class="nav nav-pills pull-left" ng-controller="MenuCtrl">
+      <li ng-class="{ active: isActive('admin/competitors')}">
+        <a href="#/admin/competitors">
+          Competitors
+        </a>
+      </li>
+      <li ng-class="{ active: isActive('admin/sponsors')}">
+        <a href="#/admin/sponsors">
+          Sponsors
+        </a>
+      </li>
+    </ul>
+    <div class="clearfix"></div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    <input class="form-control" placeholder="filter&hellip;" />
+                </th>
+                <th>
+                    <input class="form-control" placeholder="filter&hellip;" />
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Link
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="sponsor in sponsors">
+                <td>
+                    {{ sponsor.title }}
+                </td>
+                <td>
+                    {{ sponsor.link }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
