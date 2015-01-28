@@ -72,6 +72,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // LIST COMPETITORS
         error(500);
     }
     echo json_encode($confirmation);
+} else if ($_SERVER['REQUEST_METHOD'] == 'DELETE') { // DELETE COMPETITOR
+    if (empty($_SERVER['PATH_INFO'])) {
+        error(400, "Empty request payload");
+    }
+    // authentication
+    authUser();
+    $id = explode('/', $_SERVER['PATH_INFO'])[1];
+    // input validation
+    if (empty($id)) {
+        error(400, "Please enter the id of the competitor to delete");
+    }
+    // database operation
+    $query = "DELETE FROM competitors WHERE id = ?";
+    if ($stmt = $db->prepare($query)) {
+        $stmt->bind_param('i', $id);
+        if (! $stmt->execute()) {
+            error(500);
+        }
+        $stmt->close();
+    } else {
+        error(500);
+    }
+    echo json_encode(true);
 } else {
     error(405);
 }

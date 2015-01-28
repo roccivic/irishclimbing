@@ -17,6 +17,13 @@
       </li>
     </ul>
     <div class="clearfix"></div>
+    <br>
+    <div class="alert alert-success" ng-if="success">
+        {{ success }}
+    </div>
+    <div class="alert alert-danger" ng-if="error">
+        {{ error }}
+    </div>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -26,6 +33,11 @@
                 <th>
                     <input class="form-control" placeholder="filter&hellip;" />
                 </th>
+                <th>
+                    <div class="btn btn-block btn-success">
+                        Create
+                    </div>
+                </th>
             </tr>
             <tr>
                 <th>
@@ -33,6 +45,8 @@
                 </th>
                 <th>
                     Link
+                </th>
+                <th>
                 </th>
             </tr>
         </thead>
@@ -43,6 +57,11 @@
                 </td>
                 <td>
                     {{ sponsor.link }}
+                </td>
+                <td>
+                    <button class="btn btn-block btn-sm btn-danger" ng-click="delete(sponsor.id)" ng-disabled="deleting[sponsor.id]">
+                        Delete
+                    </button>
                 </td>
             </tr>
         </tbody>

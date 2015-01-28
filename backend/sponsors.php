@@ -47,20 +47,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') { // LIST SPONSORS
     }
     echo json_encode(true);
 } else if ($_SERVER['REQUEST_METHOD'] == 'DELETE') { // DELETE SPONSOR
-    $request = json_decode(file_get_contents("php://input"));
-    if (empty($request)) {
+    if (empty($_SERVER['PATH_INFO'])) {
         error(400, "Empty request payload");
     }
     // authentication
     authUser();
+    $id = explode('/', $_SERVER['PATH_INFO'])[1];
     // input validation
-    if (empty($request->id)) {
+    if (empty($id)) {
         error(400, "Please enter the id of the sponsor to delete");
     }
     // database operation
     $query = "DELETE FROM sponsors WHERE id = ?";
     if ($stmt = $db->prepare($query)) {
-        $stmt->bind_param('i', $request->id);
+        $stmt->bind_param('i', $id);
         if (! $stmt->execute()) {
             error(500);
         }

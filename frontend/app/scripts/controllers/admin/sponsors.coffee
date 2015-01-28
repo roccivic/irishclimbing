@@ -8,7 +8,8 @@
  # Controller of the irishclimbingApp
 ###
 angular.module('irishclimbingApp')
-  .controller 'AdminSponsorsCtrl', ($scope, $http, serverUrl) ->
+  .controller 'AdminSponsorsCtrl', ($scope, $http, $location, serverUrl) ->
+    $scope.deleting = {}
     $scope.loading = true
     $http.get(serverUrl + 'sponsors.php')
     .success (data) ->
@@ -17,3 +18,18 @@ angular.module('irishclimbingApp')
     .error ->
         $scope.loading = false
         $location.path '/'
+
+    $scope.delete = (id) ->
+        $scope.deleting[id] = true
+        $scope.success = null
+        $scope.error = null
+        $http.delete(serverUrl + 'sponsors.php/' + id)
+        .success ->
+            $scope.deleting[id] = false
+            for index, sponsor of $scope.sponsors
+                if sponsor.id == id
+                    $scope.sponsors.splice(index, 1)
+            $scope.success = 'Successfully deleted sponsor'
+        .error ->
+            $scope.deleting[id] = false
+            $scope.error = 'Error deleting sponsor'
