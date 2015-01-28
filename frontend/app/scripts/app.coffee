@@ -36,6 +36,9 @@ angular
       .when '/admin/sponsors',
         templateUrl: 'views/admin/sponsors.html'
         controller: 'AdminSponsorsCtrl'
+      .when '/admin/logout',
+        templateUrl: 'views/admin/logout.html'
+        controller: 'AdminLogoutCtrl'
       .otherwise
         redirectTo: '/home'
 
