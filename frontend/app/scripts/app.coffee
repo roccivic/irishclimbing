@@ -13,7 +13,8 @@ angular
     'ngAnimate',
     'ngCookies',
     'ngRoute',
-    'ngSanitize'
+    'ngSanitize',
+    'ui.bootstrap'
   ])
   .config ($routeProvider, $httpProvider) ->
     $httpProvider.defaults.withCredentials = true;
