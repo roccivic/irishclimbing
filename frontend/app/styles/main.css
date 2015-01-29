@@ -65,3 +65,11 @@ body {
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none !important;
 }
+
+.modal-content {
+  border-radius: 0;
+}
+
+.pointer {
+  cursor: pointer;
+}

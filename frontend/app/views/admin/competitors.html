@@ -29,35 +29,22 @@
     <div class="alert alert-danger" ng-if="error">
         {{ error }}
     </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="btn btn-block btn-success" ng-click="create()">
+                Create
+            </div>
+            <br>
+        </div>
+        <div class="col-sm-6">
+            <input class="form-control" ng-model="filter" placeholder="filter&hellip;" />
+            <br>
+        </div>
+    </div>
+
     <table class="table table-striped">
         <thead>
-            <tr>
-                <th>
-                    <input class="form-control" placeholder="filter&hellip;" />
-                </th>
-                <th>
-                    <input class="form-control" placeholder="filter&hellip;" />
-                </th>
-                <th>
-                    <input class="form-control" placeholder="filter&hellip;" />
-                </th>
-                <th>
-                    <select class="form-control" id="category" ng-model="category" ng-options="category for category in categories">
-                    </select>
-                </th>
-                <th>
-                    <select class="form-control" id="grade" ng-model="grade" ng-options="grade for grade in grades">
-                    </select>
-                </th>
-                <th>
-                    <input class="form-control" placeholder="filter&hellip;" />
-                </th>
-                <th>
-                    <div class="btn btn-block btn-success">
-                        Create
-                    </div>
-                </th>
-            </tr>
             <tr>
                 <th>
                     College
@@ -66,23 +53,17 @@
                     Name
                 </th>
                 <th>
-                    Email
-                </th>
-                <th>
                     Category
                 </th>
                 <th>
-                    Grade
-                </th>
-                <th>
-                    Date
+                    Registered
                 </th>
                 <th>
                 </th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="competitor in competitors">
+            <tr class="pointer" ng-repeat="competitor in competitors | filter:filter" ng-click="edit(competitor)">
                 <td>
                     {{ competitor.college }}
                 </td>
@@ -90,19 +71,13 @@
                     {{ competitor.name }}
                 </td>
                 <td>
-                    {{ competitor.email }}
-                </td>
-                <td>
                     {{ competitor.category }}
-                </td>
-                <td>
-                    {{ competitor.grade }}
                 </td>
                 <td>
                     {{ competitor.timestamp }}
                 </td>
                 <td>
-                    <button class="btn btn-block btn-sm btn-danger" ng-click="delete(competitor.id)" ng-disabled="deleting[competitor.id]">
+                    <button class="btn btn-block btn-sm btn-danger" ng-click="$event.stopPropagation();delete(competitor.id)" ng-disabled="deleting[competitor.id]">
                         Delete
                     </button>
                 </td>

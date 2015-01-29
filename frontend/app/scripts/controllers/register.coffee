@@ -8,17 +8,9 @@
  # Controller of the irishclimbingApp
 ###
 angular.module('irishclimbingApp')
-  .controller 'RegisterCtrl', ($scope, $http, $window, $timeout, serverUrl) ->
-    $scope.categories = [
-        'Male A'
-        'Male B'
-        'Female A'
-        'Female B'
-    ]
-
-    $scope.grades = [
-        'Don\'t know', '4+', '5+', '6+', '7+'
-    ]
+  .controller 'RegisterCtrl', ($scope, $http, $window, $timeout, grades, categories, serverUrl) ->
+    $scope.categories = categories
+    $scope.grades = grades
 
     ResetForm = ->
         $scope.college = ''

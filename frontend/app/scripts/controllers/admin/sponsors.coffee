@@ -8,7 +8,7 @@
  # Controller of the irishclimbingApp
 ###
 angular.module('irishclimbingApp')
-  .controller 'AdminSponsorsCtrl', ($scope, $http, $location, serverUrl) ->
+  .controller 'AdminSponsorsCtrl', ($scope, $http, $location, $modal, serverUrl) ->
     $scope.deleting = {}
     $scope.loading = true
     $http.get(serverUrl + 'sponsors.php')
@@ -33,3 +33,14 @@ angular.module('irishclimbingApp')
         .error ->
             $scope.deleting[id] = false
             $scope.error = 'Error deleting sponsor'
+
+    $scope.create = ->
+        $scope.edit null
+
+    $scope.edit = (sponsor) ->
+        modalInstance = $modal.open
+            templateUrl: 'views/admin/sponsor.html'
+            controller: 'AdminSponsorCtrl'
+            resolve:
+                sponsor: ->
+                    angular.copy sponsor

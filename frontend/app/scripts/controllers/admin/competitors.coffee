@@ -8,22 +8,9 @@
  # Controller of the irishclimbingApp
 ###
 angular.module('irishclimbingApp')
-  .controller 'AdminCompetitorsCtrl', ($scope, $http, $location, serverUrl) ->
+  .controller 'AdminCompetitorsCtrl', ($scope, $http, $location, $modal, serverUrl) ->
     $scope.deleting = {}
     $scope.loading = true
-    $scope.categories = [
-        'Any'
-        'Male A'
-        'Male B'
-        'Female A'
-        'Female B'
-    ]
-
-    $scope.grades = [
-        'Any', 'Don\'t know', '4+', '5+', '6+', '7+'
-    ]
-    $scope.category = $scope.categories[0]
-    $scope.grade = $scope.grades[0]
     $http.post(serverUrl + 'competitor.php')
     .success (data) ->
         $scope.loading = false
@@ -46,3 +33,14 @@ angular.module('irishclimbingApp')
         .error ->
             $scope.deleting[id] = false
             $scope.error = 'Error deleting competitor'
+
+    $scope.create = ->
+        $scope.edit null
+
+    $scope.edit = (competitor) ->
+        modalInstance = $modal.open
+            templateUrl: 'views/admin/competitor.html'
+            controller: 'AdminCompetitorCtrl'
+            resolve:
+                competitor: ->
+                    angular.copy competitor
