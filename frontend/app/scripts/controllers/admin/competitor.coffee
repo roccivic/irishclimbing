@@ -28,7 +28,7 @@ angular.module('irishclimbingApp')
         $scope.loading = true
         $scope.error = null
         if competitor == null
-            method = "POST"
+            method = "PUT"
             url = serverUrl + 'competitor.php'
         else
             method = "PATCH"
