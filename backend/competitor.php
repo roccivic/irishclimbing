@@ -76,7 +76,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // LIST COMPETITORS
     $request = json_decode(file_get_contents("php://input"));
     // authentication
     authUser();
-    $id = explode('/', $_SERVER['PATH_INFO'])[1];
+    $path = explode('/', $_SERVER['PATH_INFO']);
+    $id  = $path[1];
     // input validation
     if (empty($id)) {
         error(400, "Invalid competitor id");
@@ -139,7 +140,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // LIST COMPETITORS
     }
     // authentication
     authUser();
-    $id = explode('/', $_SERVER['PATH_INFO'])[1];
+    $path = explode('/', $_SERVER['PATH_INFO']);
+    $id  = $path[1];
     // input validation
     if (empty($id)) {
         error(400, "Invalid competitor id");

@@ -50,7 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') { // LIST SPONSORS
     $request = json_decode(file_get_contents("php://input"));
     // authentication
     authUser();
-    $id = explode('/', $_SERVER['PATH_INFO'])[1];
+    $path = explode('/', $_SERVER['PATH_INFO']);
+    $id  = $path[1];
     // input validation
     if (empty($id)) {
         error(400, "Invalid sponsor id");
@@ -89,7 +90,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') { // LIST SPONSORS
     }
     // authentication
     authUser();
-    $id = explode('/', $_SERVER['PATH_INFO'])[1];
+    $path = explode('/', $_SERVER['PATH_INFO']);
+    $id  = $path[1];
     // input validation
     if (empty($id)) {
         error(400, "Invalid sponsor id");
