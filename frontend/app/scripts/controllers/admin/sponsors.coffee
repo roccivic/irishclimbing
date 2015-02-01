@@ -9,6 +9,8 @@
 ###
 angular.module('irishclimbingApp')
   .controller 'AdminSponsorsCtrl', ($scope, $http, $location, $modal, serverUrl) ->
+
+    $scope.sortColumn = 'title'
     $scope.deleting = {}
     $scope.loading = true
     $http.get(serverUrl + 'sponsors.php')
@@ -56,3 +58,9 @@ angular.module('irishclimbingApp')
             else
                 $scope.success = 'Successfully created sponsor'
                 $scope.sponsors.push response
+
+    $scope.sort = (column) ->
+        if $scope.sortColumn == column
+            $scope.sortColumn = '-' + column
+        else
+            $scope.sortColumn = column

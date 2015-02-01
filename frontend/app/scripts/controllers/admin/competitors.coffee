@@ -9,6 +9,8 @@
 ###
 angular.module('irishclimbingApp')
   .controller 'AdminCompetitorsCtrl', ($scope, $http, $location, $modal, serverUrl) ->
+
+    $scope.sortColumn = '-timestamp'
     $scope.deleting = {}
     $scope.loading = true
     $http.post(serverUrl + 'competitor.php')
@@ -55,5 +57,11 @@ angular.module('irishclimbingApp')
                         $scope.competitors[index] = response
             else
                 response.timestamp = new Date().toISOString().slice(0, 19).replace('T', ' ')
-                $scope.competitors.push response
+                $scope.competitors.unshift response
                 $scope.success = 'Successfully created competitor'
+
+    $scope.sort = (column) ->
+        if $scope.sortColumn == column
+            $scope.sortColumn = '-' + column
+        else
+            $scope.sortColumn = column

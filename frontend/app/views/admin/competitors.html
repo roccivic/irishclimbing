@@ -46,24 +46,36 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>
+                <th ng-click="sort('college')" class="pointer">
                     College
+                    <i class="pull-right fa fa-sort gray" ng-if="sortColumn!='college'&&sortColumn!='-college'"></i>
+                    <i class="pull-right fa fa-sort-desc" ng-if="sortColumn=='-college'"></i>
+                    <i class="pull-right fa fa-sort-asc" ng-if="sortColumn=='college'"></i>
                 </th>
-                <th>
+                <th ng-click="sort('name')" class="pointer">
                     Name
+                    <i class="pull-right fa fa-sort gray" ng-if="sortColumn!='name'&&sortColumn!='-name'"></i>
+                    <i class="pull-right fa fa-sort-desc" ng-if="sortColumn=='-name'"></i>
+                    <i class="pull-right fa fa-sort-asc" ng-if="sortColumn=='name'"></i>
                 </th>
-                <th>
+                <th ng-click="sort('category')" class="pointer">
                     Category
+                    <i class="pull-right fa fa-sort gray" ng-if="sortColumn!='category'&&sortColumn!='-category'"></i>
+                    <i class="pull-right fa fa-sort-desc" ng-if="sortColumn=='-category'"></i>
+                    <i class="pull-right fa fa-sort-asc" ng-if="sortColumn=='category'"></i>
                 </th>
-                <th>
+                <th ng-click="sort('timestamp')" class="pointer">
                     Registered
+                    <i class="pull-right fa fa-sort gray" ng-if="sortColumn!='timestamp'&&sortColumn!='-timestamp'"></i>
+                    <i class="pull-right fa fa-sort-desc" ng-if="sortColumn=='-timestamp'"></i>
+                    <i class="pull-right fa fa-sort-asc" ng-if="sortColumn=='timestamp'"></i>
                 </th>
                 <th>
                 </th>
             </tr>
         </thead>
         <tbody>
-            <tr class="pointer" ng-repeat="competitor in competitors | filter:filter" ng-click="edit(competitor)">
+            <tr class="pointer" ng-repeat="competitor in competitors | filter:filter | orderBy:sortColumn" ng-click="edit(competitor)">
                 <td>
                     {{ competitor.college }}
                 </td>

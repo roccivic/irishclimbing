@@ -73,3 +73,7 @@ body {
 .pointer {
   cursor: pointer;
 }
+
+.gray {
+  color: #aaa;
+}

@@ -45,18 +45,24 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>
+                <th ng-click="sort('title')" class="pointer">
                     Title
+                    <i class="pull-right fa fa-sort gray" ng-if="sortColumn!='title'&&sortColumn!='-title'"></i>
+                    <i class="pull-right fa fa-sort-desc" ng-if="sortColumn=='-title'"></i>
+                    <i class="pull-right fa fa-sort-asc" ng-if="sortColumn=='title'"></i>
                 </th>
-                <th>
+                <th ng-click="sort('link')" class="pointer">
                     Link
+                    <i class="pull-right fa fa-sort gray" ng-if="sortColumn!='link'&&sortColumn!='-link'"></i>
+                    <i class="pull-right fa fa-sort-desc" ng-if="sortColumn=='-link'"></i>
+                    <i class="pull-right fa fa-sort-asc" ng-if="sortColumn=='link'"></i>
                 </th>
                 <th>
                 </th>
             </tr>
         </thead>
         <tbody>
-            <tr class="pointer" ng-repeat="sponsor in sponsors | filter:filter" ng-click="edit(sponsor)">
+            <tr class="pointer" ng-repeat="sponsor in sponsors | filter:filter | orderBy:sortColumn" ng-click="edit(sponsor)">
                 <td>
                     {{ sponsor.title }}
                 </td>
