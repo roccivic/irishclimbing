@@ -17,7 +17,10 @@ angular
     'ui.bootstrap'
   ])
   .config ($routeProvider, $httpProvider) ->
-    $httpProvider.defaults.withCredentials = true;
+    $httpProvider.defaults.withCredentials = true
+    $httpProvider.defaults.headers.patch = {
+        'Content-Type': 'application/json;charset=utf-8'
+    }
     $routeProvider
       .when '/home',
         templateUrl: 'views/home.html'

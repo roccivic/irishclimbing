@@ -20,19 +20,20 @@ angular.module('irishclimbingApp')
         $location.path '/'
 
     $scope.delete = (id) ->
-        $scope.deleting[id] = true
-        $scope.success = null
-        $scope.error = null
-        $http.delete(serverUrl + 'competitor.php/' + id)
-        .success ->
-            $scope.deleting[id] = false
-            for index, competitor of $scope.competitors
-                if competitor.id == id
-                    $scope.competitors.splice(index, 1)
-            $scope.success = 'Successfully deleted competitor'
-        .error ->
-            $scope.deleting[id] = false
-            $scope.error = 'Error deleting competitor'
+        if confirm 'Are you sure you want to delete this competitor?'
+            $scope.deleting[id] = true
+            $scope.success = null
+            $scope.error = null
+            $http.delete(serverUrl + 'competitor.php/' + id)
+            .success ->
+                $scope.deleting[id] = false
+                for index, competitor of $scope.competitors
+                    if competitor.id == id
+                        $scope.competitors.splice(index, 1)
+                $scope.success = 'Successfully deleted competitor'
+            .error ->
+                $scope.deleting[id] = false
+                $scope.error = 'Error deleting competitor'
 
     $scope.create = ->
         $scope.edit null
@@ -41,6 +42,18 @@ angular.module('irishclimbingApp')
         modalInstance = $modal.open
             templateUrl: 'views/admin/competitor.html'
             controller: 'AdminCompetitorCtrl'
+            keyboard: false
+            backdrop: 'static'
             resolve:
                 competitor: ->
                     angular.copy competitor
+        .result.then (response) ->
+            if response.id
+                $scope.success = 'Successfully edited competitor'
+                for index, competitor of $scope.competitors
+                    if competitor.id == response.id
+                        $scope.competitors[index] = response
+            else
+                response.timestamp = new Date().toISOString().slice(0, 19).replace('T', ' ')
+                $scope.competitors.push response
+                $scope.success = 'Successfully created competitor'

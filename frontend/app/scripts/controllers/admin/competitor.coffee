@@ -14,9 +14,10 @@ angular.module('irishclimbingApp')
     $scope.grades = grades
 
     if competitor == null
-        $scope.competitor = competitor
+        $scope.competitor = {}
         $scope.title = "Create competitor"
     else
+        $scope.editing = true
         $scope.competitor = competitor
         $scope.title = "Edit competitor"
 
@@ -24,4 +25,24 @@ angular.module('irishclimbingApp')
         $modalInstance.dismiss('cancel')
 
     $scope.submit = ->
-        alert 'Not implemented'
+        $scope.loading = true
+        $scope.error = null
+        if competitor == null
+            method = "POST"
+            url = serverUrl + 'competitor.php'
+        else
+            method = "PATCH"
+            url = serverUrl + 'competitor.php/' + competitor.id
+        $http(
+            url: url
+            data: $scope.competitor
+            method: method
+        )
+        .success ->
+            $modalInstance.close $scope.competitor
+        .error ->
+            $scope.loading = false
+            if competitor == null
+                $scope.error = 'Error creating competitor'
+            else
+                $scope.error = 'Error editing competitor'
