@@ -36,6 +36,9 @@
             </label>
             <div class="col-sm-9">
                 <select ng-model="competitor.category" class="form-control" ng-options="category for category in categories">
+                    <option style="display:none" value="">
+                        Please select a category
+                    </option>
                 </select>
             </div>
         </div>
@@ -45,6 +48,9 @@
             </label>
             <div class="col-sm-9">
                 <select ng-model="competitor.grade" class="form-control" ng-options="grade for grade in grades">
+                    <option style="display:none" value="">
+                        Please select a grade
+                    </option>
                 </select>
             </div>
         </div>
