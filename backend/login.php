@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if(empty($request->password)) {
         error(401, "Authentication error: No password");
     }
-    if (password_verify($request->password, CFG_ADMIN_HASH)) {
+    if (md5($request->password.CFG_ADMIN_SALT) === CFG_ADMIN_HASH) {
         $_SESSION['loggedIn'] = true;
     } else {
         error(401, "Authentication error");
