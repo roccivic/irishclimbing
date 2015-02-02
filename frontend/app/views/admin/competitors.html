@@ -77,10 +77,14 @@
         <tbody>
             <tr class="pointer" ng-repeat="competitor in competitors | filter:filter | orderBy:sortColumn" ng-click="edit(competitor)">
                 <td>
-                    {{ competitor.college }}
+                    <div class="truncate-100">
+                        {{ competitor.college }}
+                    </div>
                 </td>
                 <td>
-                    {{ competitor.name }}
+                    <div class="truncate-100">
+                        {{ competitor.name }}
+                    </div>
                 </td>
                 <td>
                     {{ competitor.category }}

@@ -64,10 +64,14 @@
         <tbody>
             <tr class="pointer" ng-repeat="sponsor in sponsors | filter:filter | orderBy:sortColumn" ng-click="edit(sponsor)">
                 <td>
-                    {{ sponsor.title }}
+                    <div class="truncate-100">
+                        {{ sponsor.title }}
+                    </div>
                 </td>
                 <td>
-                    {{ sponsor.link }}
+                    <div class="truncate-100">
+                        {{ sponsor.link }}
+                    </div>
                 </td>
                 <td>
                     <button class="btn btn-block btn-sm btn-danger" ng-click="$event.stopPropagation();delete(sponsor.id)" ng-disabled="deleting[sponsor.id]">
