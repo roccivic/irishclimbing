@@ -10,6 +10,8 @@
 angular.module('irishclimbingApp')
   .controller 'AdminCompetitorsCtrl', ($scope, $http, $location, $modal, serverUrl) ->
 
+    $scope.exportUrl = serverUrl + 'export.php'
+
     $scope.sortColumn = '-timestamp'
     $scope.deleting = {}
     $scope.loading = true
