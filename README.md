@@ -1,3 +1,6 @@
+# Deprecation notice
+THIS LIBRARY IS DEPRECATED, NO LONGER SUPPORTED, CONTAINS SECURITY VULNERABILITIES AND SHOULD NOT BE USED.
+
 # Prerequisites
 
 * install node.js http://nodejs.org/
